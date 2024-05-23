@@ -19,7 +19,8 @@ _config:
     adminUsers: |-
       **插件管理员** 的用户id (使用 inspect 指令获取)
     allowNormalUserEditAutoConversion: |-
-      允许非 **管理员** 用户编辑自动转换
+      <p>允许非 **管理员** 用户编辑自动转换</p>
+      <p>**管理员** 包括 **插件管理员** 和 **频道管理员**</p>
     allowUserEditAlias: |-
       允许非 **插件管理员** 用户编辑货币别名
 
