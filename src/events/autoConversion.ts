@@ -12,6 +12,7 @@ export function autoConversion(ctx: Context, config: Config) {
     const autoConversionRes = await ctx.database.get('auto_conversion', {channel_id: channelId, channel_platform: platform})
     const decimalSeparator = await ctx.database.get('user', {id: user.id})
     const moneyList = praser.parseAll(content, decimalSeparator[0].decimal_separator || config.basic.decimalSeparator)
+    console.log(moneyList)
     for (const conversion of autoConversionRes) {
       const baseCode = conversion.base_code
       const targetCode = conversion.target_code

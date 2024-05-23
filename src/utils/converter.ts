@@ -17,10 +17,10 @@ export class Converter {
     const directCheckRes1 = await this.ctx.database.get('exchange_rate', {base_code: baseCode, target_code: targetCode})
     const directCheckRes2 = await this.ctx.database.get('exchange_rate', {base_code: targetCode, target_code: baseCode})
     if (directCheckRes1.length === 1) {
-      const res = amount / directCheckRes1[0].rate
+      const res = amount * directCheckRes1[0].rate
       return this.toPrecision(res, 4)
     } else if (directCheckRes2.length === 1) {
-      const res = amount * directCheckRes2[0].rate
+      const res = amount / directCheckRes2[0].rate
       return this.toPrecision(res, 4)
     }
     // Use Cross Rate

@@ -19,9 +19,9 @@ export class Parser {
     //amount
     let numberRegex: RegExp
     if (decimalSeparator === ',') {
-      numberRegex = new RegExp('\\d{1,3}(?:.\\d{3})*(?:,\\d+)?')
+      numberRegex = new RegExp('\\d[\\d.]*(?:,\\d+)?')
     } else {
-      numberRegex = new RegExp('\\d{1,3}(?:,\\d{3})*(?:\\.\\d+)?')
+      numberRegex = new RegExp('\\d[\\d,]*(?:\\.\\d+)?')
     }
 
     const matchNumbers = text.match(numberRegex)
@@ -48,9 +48,9 @@ export class Parser {
     // Find all potential currency mentions
     let numberRegex: string
     if (decimalSeparator === ',') {
-      numberRegex = '\\d{1,3}(?:.\\d{3})*(?:,\\d+)?'
+      numberRegex = '\\d[\\d.]*(?:,\\d+)?'
     } else {
-      numberRegex = '\\d{1,3}(?:,\\d{3})*(?:\\.\\d+)?'
+      numberRegex = '\\d[\\d,]*(?:\\.\\d+)?'
     }
     const currencyRegex = new RegExp(`${numberRegex}\\s*(?:${Object.keys(this.currencyAliases).join("|")})`, "gi");
     const matches = text.match(currencyRegex);
