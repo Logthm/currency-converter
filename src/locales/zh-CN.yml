@@ -1,0 +1,129 @@
+_config:
+  basic:
+    $desc: |-
+      基本设置
+    apiKey: |-
+      <p>插件使用的汇率 API Key</p>
+      <p>请前往 <a href="https://www.exchangerate-api.com/">https://www.exchangerate-api.com/</a> 获取</p>
+    baseCurrency: |-
+      默认使用的基准货币代码
+    decimalSeparator:
+      $desc: |-
+        默认使用的整数与小数的分隔符
+      $inner:
+        - "逗号 (,)"
+        - "点 (.)"
+  permission:
+    $desc: |-
+      权限设置
+    adminUsers: |-
+      **插件管理员** 的用户id (使用 inspect 指令获取)
+    allowNormalUserEditAutoConversion: |-
+      允许非 **管理员** 用户编辑自动转换
+    allowUserEditAlias: |-
+      允许非 **插件管理员** 用户编辑货币别名
+
+commands:
+  noAuth: |-
+    你没有使用该指令的权限！
+  timeout: |-
+    输入超时！
+  rate:
+    convert:
+      description: |-
+        手动转换货币
+      messages:
+        empty: |-
+          请输入要转换的金额或货币名！
+        errorInputFormat: |-
+          请输入正确的参数!
+        input: |-
+          请输入转换前的 {0} 金额：
+    help:
+      description: |-
+        显示 Currency Converter 帮助信息
+      messages:
+        help: |-
+          <p>帮助文档：</p>
+          <a>https://docs.logthm.com/currency-converter</a>
+    base:
+      description: |-
+        设置基准货币
+      messages:
+        error: |-
+          请输入正确的货币名称或代码！
+        success: |-
+          设置基准货币为 {0}
+        current: |-
+          当前基准货币为 {0}
+    separator:
+      description: |-
+        设置整数与小数的分隔符
+      messages:
+        comma: |-
+          逗号 (,)
+        point: |-
+          点 (.)
+        success: |-
+          设置分隔符为 {0}
+        error: |-
+          请输入 , 或 .
+        current: |-
+          当前分隔符为 {0}
+    alias:
+      description: |-
+        设置货币别名
+      messages:
+        empty: |-
+          请输入货币名称或代码！
+        ask: |-
+          请输入要为 {0} 添加的别称（一行一个）：
+        success: |-
+          成功设置货币别名。
+    detail:
+      description: |-
+        显示货币详细信息
+      messages:
+        empty: |-
+          请输入货币名称或代码！
+        detail: |-
+          <p>货币代码：{code}</p>
+          <p>对 {base} 汇率：1 {code} = {rate} {base}</p>
+          <p>货币别称：{alias}</p>
+
+    auto:
+      add:
+        description: |-
+          添加自动转换
+        messages:
+          empty: |-
+            请输入货币名称或代码！
+          success: |-
+            成功创建自动转换：{0}
+          exist: |-
+            该自动转换已存在！
+      remove:
+        description: |-
+          删除自动转换
+        messages:
+          empty: |-
+            自动转换列表为空！
+          error: |-
+            请输入正确的序号！
+          header: |-
+            <p>请选择要删除的自动转换：</p>
+          success: |-
+            成功删除自动转换：{0} to {1}
+      list:
+        description: |-
+          显示自动转换列表
+        messages:
+          empty: |-
+            自动转换列表为空！
+          header: |-
+            <p>该频道启用的自动转换：</p>
+
+messageBuilder:
+  autoConversionList:
+    item: |-
+      <p>{index}. {base} to {target}</p>

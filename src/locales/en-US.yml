@@ -1,0 +1,14 @@
+_config:
+  basic:
+    $desc: |-
+      Basic Settings
+    apiKey: |-
+      <p>Exchange rate API Key used by the plugin</p>
+      <p>Obtain at <a href="https://www.exchangerate-api.com/">https://www.exchangerate-api.com/</a></p>
+  permission:
+    $desc: |-
+      Permission Settings
+    adminUsers: |-
+      User ID of **Plugin Admin** (Can be obtained by **inspect** command)
+    allowNormalUserEditAutoConversion: |-
+      Allow normal users edit auto conversion
