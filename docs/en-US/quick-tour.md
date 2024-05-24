@@ -1,15 +1,17 @@
 ---
 description: >-
-  Currency Converter is a plugin that provides exchange rate conversion functionality. This page offers useful tips and explanations to help you quickly start using Currency Converter.
+  Currency Converter is a plugin that provides exchange rate conversion
+  functionality. This page offers useful tips and explanations to help you
+  quickly start using Currency Converter.
 ---
 
 # Quick Tour
 
 ## Internationalization
 
-If you frequently use another currency, you can set your [Base Currency](basic/base-currency.md)。
+If you frequently use another currency, you can set your [Base Currency](basic/base-currency.md).
 
-If you prefer to use `,` instead of `.` as decimal separator, you can set your [Decimal Separator](basic/decimal-separator.md)。
+If you prefer to use `,` instead of `.` as decimal separator, you can set your [Decimal Separator](basic/decimal-separator.md).
 
 If you use another language, you can switch your language preference.
 
