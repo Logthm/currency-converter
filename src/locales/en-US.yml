@@ -5,10 +5,126 @@ _config:
     apiKey: |-
       <p>Exchange rate API Key used by the plugin</p>
       <p>Obtain at <a href="https://www.exchangerate-api.com/">https://www.exchangerate-api.com/</a></p>
+    baseCurrency: |-
+      Default base currency code
+    decimalSeparator:
+      $desc: |-
+        Default decimal separator
+      $inner:
+        - "comma (,)"
+        - "point (.)"
   permission:
     $desc: |-
       Permission Settings
     adminUsers: |-
       User ID of **Plugin Admin** (Can be obtained by **inspect** command)
     allowNormalUserEditAutoConversion: |-
-      Allow normal users edit auto conversion
+      </p>Allow non-**Admin** users to edit auto conversions</p>
+      <p>**Admin** is including **Plugin Admin** and **Channel Admin**</p>
+    allowUserEditAlias: |-
+      Allow non-**Plugin Admin** users to edit currency alias
+
+commands:
+  noAuth: |-
+    You do not have permission to use this command!
+  timeout: |-
+    Input timeout!
+  rate:
+    convert:
+      description: |-
+        Manually convert currency
+      messages:
+        empty: |-
+          Please enter the amount or currency name to convert!
+        errorInputFormat: |-
+          Please enter the correct parameters!
+        input: |-
+          Please enter the amount of {0}:
+    help:
+      description: |-
+        Display Currency Converter help information
+      messages:
+        help: |-
+          <p>User Guide:</p>
+          <a>https://docs.logthm.com/currency-converter</a>
+    base:
+      description: |-
+        Set base currency
+      messages:
+        error: |-
+          Please enter the correct currency name or code!
+        success: |-
+          Set base currency to {0}
+        current: |-
+          The current base currency is {0}
+    separator:
+      description: |-
+        Set decimal separator
+      messages:
+        comma: |-
+          comma (,)
+        point: |-
+          point (.)
+        success: |-
+          Set decimal separator to {0}
+        error: |-
+          Please input , or .
+        current: |-
+          The current decimal separator is {0}
+    alias:
+      description: |-
+        Set currency alias
+      messages:
+        empty: |-
+          Please enter the currency name or code!
+        ask: |-
+          Please enter the alias to add for {0} (one per line):
+        success: |-
+          Currency alias set successfully.
+    detail:
+      description: |-
+        Display currency details
+      messages:
+        empty: |-
+          Please enter the currency name or code!
+        detail: |-
+          <p>Currency Code: {code}</p>
+          <p>Exchange rate to {base}: 1 {code} = {rate} {base}</p>
+          <p>Currency Alias: {alias}</p>
+
+    auto:
+      add:
+        description: |-
+          Add auto conversion
+        messages:
+          empty: |-
+            Please enter the currency name or code!
+          success: |-
+            Successfully created auto conversion: {0}
+          exist: |-
+            This auto conversion already exists!
+      remove:
+        description: |-
+          Delete auto conversion
+        messages:
+          empty: |-
+            The list of auto conversions is empty!
+          error: |-
+            Please enter the correct index!
+          header: |-
+            <p>Please select the auto conversion to delete:</p>
+          success: |-
+            Successfully deleted auto conversion: {0} to {1}
+      list:
+        description: |-
+          Display auto conversion list
+        messages:
+          empty: |-
+            The list of auto conversions is empty!
+          header: |-
+            <p>Enabled auto conversions in this channel:</p>
+
+messageBuilder:
+  autoConversionList:
+    item: |-
+      <p>{index}. {base} to {target}</p>
