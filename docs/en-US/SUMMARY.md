@@ -17,23 +17,23 @@
 
 ## Auto Conversion <a href="#auto-convert" id="auto-convert"></a>
 
-* [Overview](auto-convert/jian-jie.md)
+* [Overview](auto-convert/overview.md)
 * [Add Auto Conversion](auto-convert/add.md)
 * [Delete Auto Conversion](auto-convert/delete.md)
 * [Display Enabled Auto Conversion In Channel](auto-convert/list.md)
 
-## Advanced <a href="#advanced" id="advanced"></a>
+## Advanced
 
 * [Add Currency Alias](advanced/add-alias.md)
 * [Display Currency Details](advanced/detail.md)
 
-## Configuration <a href="#configuration" id="configuration"></a>
+## Configuration
 
 * [Overview](configuration/overview.md)
 * [Basic](configuration/basic.md)
 * [Permission](configuration/permission.md)
 
-## Glossary <a href="#glossary" id="glossary"></a>
+## Glossary
 
 * [Amount With Unit](glossary/amount-with-unit.md)
 * [Currency Code](glossary/currency-code.md)
