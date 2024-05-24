@@ -17,7 +17,7 @@
 
 ## 自动转换 <a href="#auto-convert" id="auto-convert"></a>
 
-* [简介](auto-convert/jian-jie.md)
+* [简介](auto-convert/overview.md)
 * [创建自动转换](auto-convert/add.md)
 * [删除转换](auto-convert/delete.md)
 * [查询频道内启用的转换](auto-convert/list.md)
