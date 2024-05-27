@@ -1,7 +1,7 @@
 {
   "name": "koishi-plugin-currency-converter",
   "description": "A currency conversion plugin for Koishi.",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "contributors": [
     "Logthm <logthm@outlook.com>"
   ],
@@ -39,8 +39,7 @@
     },
     "service": {
       "required": [
-        "database",
-        "assets"
+        "database"
       ]
     },
     "locales": [
