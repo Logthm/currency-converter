@@ -6,7 +6,6 @@ export function autoConversion(ctx: Context, config: Config) {
   ctx.middleware(async (session, next) => {
     let msg = ''
     const input = h.select(session.elements, 'text')
-    console.log(session.elements,input)
     const channelId = session.channelId
     const platform = session.platform
     const user = await ctx.database.getUser(platform, session.userId)
