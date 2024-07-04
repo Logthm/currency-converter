@@ -1,4 +1,6 @@
 import { Schema } from "koishi"
+import zhCN from './locales/zh-CN.yml'
+import enUS from './locales/en-US.yml'
 
 namespace BasicConfig {
   export interface Config {
@@ -40,6 +42,6 @@ export const Config: Schema<Config> = Schema.object({
   basic: basicConfig,
   permission: permissionConfig,
 }).i18n({
-  "en-US": require("./locales/en-US")._config,
-  "zh-CN": require("./locales/zh-CN")._config,
+  "en-US": enUS._config,
+  "zh-CN": zhCN._config
 })

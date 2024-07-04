@@ -5,6 +5,8 @@ import * as Command from "./command"
 import * as Events from "./events"
 import {Converter} from "./utils/converter"
 import {Parser} from "./utils/parser"
+import zhCN from './locales/zh-CN.yml'
+import enUS from './locales/en-US.yml'
 
 export * from "./config"
 
@@ -16,8 +18,8 @@ export let praser: Parser
 
 export async function apply(ctx: Context, config: Config) {
   // localization
-  ['en-US', 'zh-CN']
-    .forEach(lang => ctx.i18n.define(lang, require(`./locales/${lang}`)))
+  [['en-US', enUS], ['zh-CN', zhCN]]
+    .forEach(([lang, file]) => ctx.i18n.define(lang, file))
   // initialization
   ctx.plugin(Database)
   ctx.plugin(Events, config)
