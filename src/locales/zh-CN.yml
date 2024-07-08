@@ -81,6 +81,8 @@ commands:
           请输入要为 {0} 添加的别称（一行一个）：
         success: |-
           成功设置货币别名。
+        reset: |-
+          重置货币别名成功。
     detail:
       description: |-
         显示货币详细信息

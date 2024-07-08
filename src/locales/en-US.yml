@@ -81,6 +81,8 @@ commands:
           Please enter the alias to add for {0} (one per line):
         success: |-
           Currency alias set successfully.
+        reset: |-
+          Currency alias reset successfully.
     detail:
       description: |-
         Display currency details

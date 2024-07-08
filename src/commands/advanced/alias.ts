@@ -2,12 +2,19 @@ import {Context} from 'koishi';
 import {Config} from '../../config';
 import {praser} from "../../index";
 import {isPluginAdmin} from "../../utils/role";
+import {initCurrencyAlias} from "../../utils/general";
 
 export function alias(ctx: Context, config: Config) {
   ctx.command("rate.alias <message>")
     .alias('货币别名')
     .alias('rate.a')
-    .action(async ({session}, message) => {
+    .option('reset', '-r')
+    .action(async ({session, options}, message) => {
+      if (options.reset) {
+        if (!isPluginAdmin(session, config)) return session.text('commands.noAuth')
+        await initCurrencyAlias(ctx, config)
+        return session.text('.reset')
+      }
       if (!config.permission.allowNormalUserEditAutoConversion) {
         if (!isPluginAdmin(session, config)) return session.text('commands.noAuth')
       }
