@@ -1,5 +1,6 @@
 import {Context} from 'koishi'
 import {Config} from '../config'
+import {updateExchangeRates} from "./general";
 
 
 export class Converter {
@@ -9,10 +10,10 @@ export class Converter {
     this.ctx = context
   }
 
-  public async convert(amount: number, baseCode: string, targetCode: string) {
+  public async convert(amount: number, baseCode: string, targetCode: string, config: Config) {
     if (baseCode === targetCode) return amount
     const rates = await this.ctx.database.get('exchange_rate', {})
-    if (!(rates.length != 0 && new Date() < rates[0].next_update)) await this.ctx.emit('currency-converter/exchange-rate-update')
+    if (!(rates.length != 0 && new Date() < rates[0].next_update)) await updateExchangeRates(this.ctx, config)
     // Use Direct Rate
     const directCheckRes1 = await this.ctx.database.get('exchange_rate', {base_code: baseCode, target_code: targetCode})
     const directCheckRes2 = await this.ctx.database.get('exchange_rate', {base_code: targetCode, target_code: baseCode})

@@ -12,7 +12,7 @@ export function detail(ctx: Context, config: Config) {
       const code = praser.parse(message, '.')[1]
       if (!code) return session.text('.empty')
 
-      const targetAmount = await converter.convert(1, code, session.user.base_currency || config.basic.baseCurrency)
+      const targetAmount = await converter.convert(1, code, session.user.base_currency || config.basic.baseCurrency, config)
       const res = await ctx.database.get('currency', {code: code})
       return session.text('.detail', {
         code: res[0].code,

@@ -18,7 +18,7 @@ export function autoConversion(ctx: Context, config: Config) {
         const targetCode = conversion.target_code
         for (const [amount, base] of moneyList) {
           if (base === baseCode) {
-            const targetAmount = await converter.convert(amount, baseCode, targetCode)
+            const targetAmount = await converter.convert(amount, baseCode, targetCode, config)
             msg += `${amount} ${baseCode} = ${targetAmount} ${targetCode}\n`
           }
         }

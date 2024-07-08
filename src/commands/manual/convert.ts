@@ -25,7 +25,7 @@ export function convert(ctx: Context, config: Config) {
       }
 
       try {
-        const targetAmount = await converter.convert(Number(amount), baseCode, targetCode)
+        const targetAmount = await converter.convert(Number(amount), baseCode, targetCode, config)
         if (currentSeparator === ',') {
           const a = amount.toString().replace('.', ',')
           const t = targetAmount.toString().replace('.', ',')
