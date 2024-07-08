@@ -12,6 +12,7 @@ export function alias(ctx: Context, config: Config) {
     .action(async ({session, options}, message) => {
       if (options.reset) {
         if (!isPluginAdmin(session, config)) return session.text('commands.noAuth')
+        await ctx.database.remove('currency', {})
         await initCurrencyAlias(ctx, config)
         return session.text('.reset')
       }

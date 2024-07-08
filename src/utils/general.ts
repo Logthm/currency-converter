@@ -28,7 +28,7 @@ export async function updateExchangeRates(ctx: Context, config: Config) {
 }
 
 export async function initCurrencyAlias(ctx: Context, config: Config) {
-  const res = await ctx.database.get('exchange_rate', {}, ['target_code'])
+  const res = await ctx.database.get('exchange_rate', {base_code: 'USD'}, ['target_code'])
   const mappedRes = res.map(item => ({ code: item.target_code, alias: [`${item.target_code.toLowerCase()}`]}))
   await ctx.database.upsert('currency', mappedRes, 'code')
   await ctx.database.upsert('currency', (row) => [
