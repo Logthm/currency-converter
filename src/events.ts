@@ -1,16 +1,14 @@
-import { Context } from "koishi"
-import { Config } from "./config"
+import { Context } from "koishi";
+import { Config } from "./config";
 
-import {initialization} from "./events/initialization";
-import {autoConversion} from "./events/autoConversion";
+import { autoConversion } from "./events/autoConversion";
 
-export const name = 'Events'
+export const name = "Events";
 
-declare module 'koishi' {
+declare module "koishi" {
   interface Events {}
 }
 
 export function apply(ctx: Context, config: Config) {
-  initialization(ctx, config)
-  autoConversion(ctx, config)
+  autoConversion(ctx, config);
 }

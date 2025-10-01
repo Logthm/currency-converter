@@ -1,0 +1,111 @@
+name: Build and Publish
+
+on:
+  push:
+    branches:
+      - master
+    paths:
+      - "package.json"
+  pull_request:
+    branches:
+      - master
+    paths:
+      - "package.json"
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  check-version:
+    runs-on: ubuntu-latest
+    outputs:
+      version_changed: ${{ steps.diff.outputs.version_changed }}
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+
+      - name: Compare package.json version
+        id: diff
+        run: |
+          PREV=$(git show HEAD~1:package.json 2>/dev/null \
+              | grep -oP '"version": "\K[^"]+')
+          CURR=$(grep -oP '"version": "\K[^"]+' package.json)
+
+          echo "prev=$PREV  curr=$CURR"
+          if [ -z "$PREV" ] || [ "$PREV" != "$CURR" ]; then
+              echo "version_changed=true" >> $GITHUB_OUTPUT
+          else
+              echo "version_changed=false" >> $GITHUB_OUTPUT
+          fi
+
+  build:
+    needs: check-version
+    if: always()
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Boilerplate
+        uses: actions/checkout@v4
+        with:
+          repository: koishijs/boilerplate
+
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          path: external/currency-converter
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+
+      - name: Enable Corepack
+        run: corepack enable
+
+      - name: Install Dependencies
+        run: |
+          cd .
+          yarn --no-immutable
+
+      - name: Lint & format check
+        run: |
+          cd external/currency-converter
+          yarn lint
+          yarn format --check
+
+      - name: Build Package
+        run: |
+          cd .
+          yarn build
+
+      - name: Upload build artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: build-artifacts
+          path: |
+            external/currency-converter/lib
+            external/currency-converter/package.json
+            external/currency-converter/readme.md
+
+  publish:
+    needs: [check-version, build]
+    runs-on: ubuntu-latest
+    if: needs.check-version.outputs.version_changed == 'true'
+    steps:
+      - name: Download build artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: build-artifacts
+          path: external/currency-converter
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+
+      - name: Set npm token
+        run: |
+          echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > ~/.npmrc
+
+      - name: Publish to npm
+        run: |
+          cd external/currency-converter
+          npm publish --access public
