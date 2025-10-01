@@ -11,6 +11,16 @@ on:
       - master
     paths:
       - "package.json"
+  workflow_dispatch:
+    inputs:
+      skip_version_check:
+        description: "Skip version check and force build & publish"
+        required: false
+        default: "false"
+        type: choice
+        options:
+          - "true"
+          - "false"
 
 permissions:
   id-token: write
@@ -34,6 +44,13 @@ jobs:
       - name: Compare package.json version
         id: diff
         run: |
+          # Skip version check if manually triggered with skip_version_check=true
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ] && [ "${{ github.event.inputs.skip_version_check }}" = "true" ]; then
+            echo "Skipping version check (manual trigger with skip_version_check=true)"
+            echo "version_changed=true" >> $GITHUB_OUTPUT
+            exit 0
+          fi
+
           PREV=$(git show HEAD~1:package.json 2>/dev/null \
               | grep -oP '"version": "\K[^"]+')
           CURR=$(grep -oP '"version": "\K[^"]+' package.json)
