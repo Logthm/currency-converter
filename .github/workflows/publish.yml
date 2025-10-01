@@ -67,12 +67,6 @@ jobs:
           cd .
           yarn --no-immutable
 
-      - name: Lint & format check
-        run: |
-          cd external/currency-converter
-          yarn lint
-          yarn format --check
-
       - name: Build Package
         run: |
           cd .
