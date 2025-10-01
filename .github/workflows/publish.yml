@@ -119,7 +119,7 @@ jobs:
           registry-url: "https://registry.npmjs.org"
 
       - name: Update npm
-        run: npm install -g npm@latest
+        run: sudo npm install -g npm@latest
 
       - name: Publish to npm
         run: |
