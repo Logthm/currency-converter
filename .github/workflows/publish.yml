@@ -12,6 +12,10 @@ on:
     paths:
       - "package.json"
 
+permissions:
+  id-token: write
+  contents: read
+
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
@@ -94,10 +98,11 @@ jobs:
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
+        with:
+          registry-url: "https://registry.npmjs.org"
 
-      - name: Set npm token
-        run: |
-          echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > ~/.npmrc
+      - name: Update npm
+        run: npm install -g npm@latest
 
       - name: Publish to npm
         run: |
